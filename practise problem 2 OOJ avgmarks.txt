@@ -1,0 +1,86 @@
+question number 2 (practise problems)
+Question-
+Define a STUDENT class with USN, Name, Marks in 3 tests of a subject. Declare an array of
+n STUDENT objects. Using appropriate methods, find the average of 2 better marks for each
+student. Print the USN, Name and the average marks of all the students. Use constructors and
+destructors to initialize and destroy the object.
+
+import java.util.Scanner;
+
+class STUDENT {
+    private String USN;
+    private String name;
+    private int[] marks;
+
+   
+    public STUDENT(String USN, String name, int[] marks) {
+        this.USN = USN;
+        this.name = name;
+        this.marks = marks;
+    }
+
+    public double calculateAverage() {
+        int totalMarks = 0;
+        int minMark = Integer.MAX_VALUE;
+
+     
+        for (int mark : marks) {
+            totalMarks += mark;
+            if (mark < minMark) {
+                minMark = mark;
+            }
+        }
+
+       
+        totalMarks -= minMark;
+
+       
+        return (double) totalMarks / (marks.length - 1);
+    }
+
+    public void displayDetails() {
+        System.out.println("USN: " + USN);
+        System.out.println("Name: " + name);
+        System.out.println("Average Marks: " + calculateAverage());
+        System.out.println();
+    }
+}
+
+public class avgmarks {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of students: ");
+        int n = scanner.nextInt();
+
+       
+        STUDENT[] students = new STUDENT[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter details for Student " + (i + 1) + ":");
+            System.out.print("USN: ");
+            String USN = scanner.next();
+            System.out.print("Name: ");
+            String name = scanner.next();
+            int[] marks = new int[3];
+            System.out.print("Enter Marks in 3 tests: ");
+            for (int j = 0; j < 3; j++) {
+                marks[j] = scanner.nextInt();
+            }
+
+           
+            students[i] = new STUDENT(USN, name, marks);
+        }
+
+     
+        for (STUDENT student : students) {
+            student.displayDetails();
+        }
+
+        scanner.close();
+    }
+}
+
+
+
+
